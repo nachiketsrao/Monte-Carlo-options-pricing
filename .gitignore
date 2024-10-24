@@ -1,0 +1,11 @@
+.stack-work/
+dist/
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+*.prof
+*.aux
+*.hp
+*.eventlog
+*.tix

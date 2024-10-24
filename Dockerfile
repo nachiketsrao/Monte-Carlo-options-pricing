@@ -1,21 +1,25 @@
-# Use an official Haskell image as a base
-FROM haskell:latest
+# Use the official Haskell image
+FROM haskell:8.10
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy the current directory contents into the container at /usr/src/app
+# Copy the stack configuration and package files
+COPY stack.yaml ./
+COPY package.yaml ./
+
+# Install Stack
+RUN stack setup
+
+# Copy the rest of the project files
 COPY . .
 
-# Install any additional system-level dependencies (optional)
-# RUN apt-get update && apt-get install -y <additional-package>
+# Build the Haskell project
+RUN stack build --fast -v
 
-# Build the Haskell project using Stack
-RUN stack setup
-RUN stack build
+# Expose the port the app runs on
+EXPOSE 3000
 
-# Open a port (if your Haskell application is a web server)
-# EXPOSE 8080
+# Run the application
+CMD ["stack", "exec", "haskell-option-pricing-exe"]
 
-# Define the command to run your app
-CMD ["stack", "exec", "my-project-exe"]

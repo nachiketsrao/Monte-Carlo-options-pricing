@@ -1,0 +1,22 @@
+name:                haskell-option-pricing
+version:             0.1.0.0
+synopsis:            Haskell-based API for Monte Carlo options pricing
+dependencies:
+  - base >= 4.7 && < 5
+  - scotty
+  - aeson
+  - text
+  - random
+  - hspec # For testing
+
+library:
+  source-dirs: src
+
+executables:
+  haskell-option-pricing-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
